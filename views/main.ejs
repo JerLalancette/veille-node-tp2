@@ -14,7 +14,10 @@
                     <% for(info in elm) { %>
                         <td><%= elm[info] %></td>
                     <% } %>
+                    <td><a href="/detruire/<%= elm._id %>">Détruire </a></td>
                 </tr>
+                
+                <a href="http://localhost:8081/formulaire">formulaire</a>
             
     <% } %>
 </table>
