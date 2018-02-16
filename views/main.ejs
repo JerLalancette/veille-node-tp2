@@ -1,0 +1,20 @@
+<table class="tableau">
+    <% let noligne = 0 %>
+        <% for(elm of adresses) { %>
+            <% if (noligne==0) { %>
+                <tr>
+                    <% noligne++ %>
+                    <% for(info in elm) {%>
+                        <td><%= info %></td>
+                    <% } %>
+                </tr>
+            <% } %>
+
+                <tr>
+                    <% for(info in elm) { %>
+                        <td><%= elm[info] %></td>
+                    <% } %>
+                </tr>
+            
+    <% } %>
+</table>
