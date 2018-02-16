@@ -15,7 +15,12 @@ app.get('/formulaire', (req, res) => {
     res.sendFile( __dirname + "/public/html/" + "01_html.htm" );
 })
 
-app.get('/ajouter', (req, res) => {
+app.get('/accueil', (req, res) => {
+    console.log(__dirname);
+    res.sendFile( __dirname + "/public/html/" + "02_html.htm" );
+})
+
+app.post('/ajouter', (req, res) => {
     db.collection('adresse').save(req.body, (err, result) => {
     if (err) return console.log(err)
     console.log('sauvegarder dans la BD')
@@ -28,8 +33,8 @@ app.get('/detruire/:_id', (req, res) => {
     db.collection('adresse').findOneAndDelete( {_id: ObjectID(req.params._id)} ,(err, resultat) => {
 
         if (err) return console.log(err)
-        
-        res.redirect('./views/gabarit.ejs', {adresse: resultat})
+
+        res.redirect('/')
     }) 
 })
 
