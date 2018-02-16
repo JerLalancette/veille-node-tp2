@@ -38,6 +38,18 @@ app.get('/detruire/:_id', (req, res) => {
     }) 
 })
 
+app.get('/trier/:clef/:ordre', (req, res) => {
+
+    let clef = req.params.clef
+    let ordre = (req.params.ordre == 'asc' ? 1 : -1)
+    let cursor = db.collection('adresse').find().sort(clef,ordre).toArray(function(err, resultat){
+
+        if (err) return console.log(err)
+        ordre = (req.params.ordre == 'asc' ? 'des' : 'asc');
+        res.render('gabarit.ejs', {adresses: resultat, clef, ordre});
+    })
+})
+
 app.get('/', (req, res) => {
     let cursor = db.collection('adresse')
                 .find().toArray(function(err, resultat){
