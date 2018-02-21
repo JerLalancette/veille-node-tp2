@@ -7,6 +7,7 @@ const MongoClient = require('mongodb').MongoClient
 const ObjectID = require('mongodb').ObjectID;
 const bodyParser= require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}))
+var util = require("util");
 
 app.set('view engine', 'ejs'); // générateur de template
 
@@ -50,13 +51,35 @@ app.get('/trier/:clef/:ordre', (req, res) => {
     })
 })
 
+app.post('/modifier', (req, res) => {
+    console.log('req.body' + req.body)
+
+        if (req.body['_id'] != undefined) { 
+            console.log('sauvegarde') 
+            var oModif = {
+                "_id": ObjectID(req.body['_id']), 
+                prenom:req.body.prenom, 
+                nom: req.body.nom,
+                telephone:req.body.telephone,
+                email:req.body.email
+            }
+            
+            
+        }
+    db.collection('adresse').save(oModif, (err, result) => {
+        if (err) return console.log(err)
+        console.log('sauvegarder dans la BD')
+        res.redirect('/')
+    })
+})
+
 app.get('/', (req, res) => {
     let cursor = db.collection('adresse')
                 .find().toArray(function(err, resultat){
         if (err) return console.log(err)
         // transfert du contenu vers la vue index.ejs (renders)
         // affiche le contenu de la BD
-        res.render('gabarit.ejs', {adresses: resultat})
+        res.render('gabarit.ejs', {adresses: resultat, ordre:'asc'})
  }) 
 })
 
