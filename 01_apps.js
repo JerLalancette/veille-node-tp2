@@ -46,7 +46,7 @@ app.get('/trier/:clef/:ordre', (req, res) => {
 
         if (err) return console.log(err)
         ordre = (req.params.ordre == 'asc' ? 'des' : 'asc');
-        res.render('gabarit.ejs', {adresses: resultat, clef, ordre});
+        res.render('gabarit.ejs', {adresses: resultat, clef, ordre:ordre});
     })
 })
 

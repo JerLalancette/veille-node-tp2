@@ -1,29 +1,14 @@
-<%
-    objTri {
-        "_id" : 'asc',
-        "nom" : 'asc',
-        "prenom" : 'asc',
-        "telephone" : 'asc',
-        "courriel" : 'asc'
-    }
-    if (typeof(clef) !== '') {
-        objTri[clef] = ordre
-    }
-
-%>
-
-
 <table class="tableau">
     <% let noligne = 0 %>
         <% for(elm of adresses) { %>
             <% if (noligne==0) { %>
                 <tr>
                     <% noligne++ %>
-                    <td><a href="trier/_id/<%= objTri._id %>">id</a></td>
-                    <td><a href="trier/nom/<%= objTri.nom %>">nom</a></td>
-                    <td><a href="trier/prenom/<%= objTri.prenom %>">prenom</a></td>
-                    <td><a href="trier/telephone/<%= objTri.telephone %>">telephone</a></td>
-                    <td><a href="trier/courriel/<%= objTri.courriel %>">courriel</a></td>
+                    <td><a href="/trier/_id/<%= ordre %>">id</a></td>
+                    <td><a href="/trier/prenom/<%= ordre %>">prenom</a></td>
+                    <td><a href="/trier/nom/<%= ordre %>">nom</a></td>
+                    <td><a href="/trier/telephone/<%= ordre %>">telephone</a></td>
+                    <td><a href="/trier/email/<%= ordre %>">email</a></td>
                 </tr>
             <% } %>
 
@@ -33,5 +18,5 @@
                     <% } %>
                     <td><a href="/detruire/<%= elm._id %>">Détruire </a></td>
                 </tr>            
-    <% } %>
+        <% } %>
 </table>
