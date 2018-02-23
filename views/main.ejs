@@ -5,7 +5,7 @@
     <input type="text" name="nom">
     <input type="text" name="telephone">
     <input type="text" name="email">
-</form>
+</form> 
 
 <table class="tableau">
     <% let noligne = 0 %>
@@ -18,15 +18,18 @@
                     <td><a href="/trier/nom/<%= ordre %>">nom</a></td>
                     <td><a href="/trier/telephone/<%= ordre %>">telephone</a></td>
                     <td><a href="/trier/email/<%= ordre %>">email</a></td>
+                    <td><a href="http://localhost:8081/formulaire">Ajouter</a></td>
                 </tr>
             <% } %>
+
+            
 
                 <tr>
                     <% for(info in elm) { %>
                         <td class="<%= info %>" contenteditable="true"><%= elm[info] %></td>
                     <% } %>
                     <td><a href="/detruire/<%= elm._id %>">Détruire </a></td>
-                    <td><a class="modifier" >Sauver </a></td>
+                    <td><a href="" class="modifier" >Sauver </a></td>
                 </tr>            
         <% } %>
 </table>

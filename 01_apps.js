@@ -26,12 +26,12 @@ app.get("/peupler", (req, res) => {
 
 app.get('/formulaire', (req, res) => {
     console.log(__dirname);
-    res.sendFile( __dirname + "/public/html/" + "01_html.htm" );
+    res.render("formulaire");
 })
 
 app.get('/accueil', (req, res) => {
     console.log(__dirname);
-    res.sendFile( __dirname + "/public/html/" + "02_html.htm" );
+    res.render("Accueil");
 })
 
 app.get("/vider", (req, res) => {

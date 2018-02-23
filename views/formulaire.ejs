@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<%-  include header %>
+
+<body>
+     
+        <a href="http://localhost:8081/formulaire">Ajouter</a>
+        <a href="http://localhost:8081/Accueil">Accueil</a>
+        <a href="http://localhost:8081">Adresse</a>
+    
+        <form action="/ajouter" method="POST">
+            
+            <input type="text" placeholder="prenom" name="prenom" required="">
+            <input type="text" placeholder="nom" name="nom" required="">
+            <input type="text" placeholder="telephone" name="telephone" required="">
+            <input type="text" placeholder="email" name="email" required="">
+            <button type="submit">Submit</button>
+            
+        </form>
+     </body>
+
+
+</html>
