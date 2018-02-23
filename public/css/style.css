@@ -103,6 +103,23 @@ h2 {
 #mon_formulaire {
   display: none;
 }
+.tableau {
+  text-align: center;
+  margin-left: 30%;
+  margin-top: 3%;
+}
+._id {
+  display: none;
+}
+.prenom,
+.nom,
+.telephone,
+.email {
+  margin-right: 10px;
+}
+.tableau {
+  margin-top: 10px;
+}
 footer {
   display: flex;
   flex-direction: row;
