@@ -11,6 +11,19 @@ var util = require("util");
 
 app.set('view engine', 'ejs'); // générateur de template
 
+const peupler = require('./mes_modules/peupler');
+
+app.get("/peupler", (req, res) => {
+
+    let resultat = peupler();
+
+    console.log("debut boucle");
+    db.collection('adresse').insert(resultat, (err, result) => {
+        if (err) return console.log(err);
+        res.redirect('/');
+    })
+})
+
 app.get('/formulaire', (req, res) => {
     console.log(__dirname);
     res.sendFile( __dirname + "/public/html/" + "01_html.htm" );
