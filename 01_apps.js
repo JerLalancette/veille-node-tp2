@@ -34,6 +34,13 @@ app.get('/accueil', (req, res) => {
     res.sendFile( __dirname + "/public/html/" + "02_html.htm" );
 })
 
+app.get("/vider", (req, res) => {
+    db.collection('adresse').drop((err, result) => {
+        if (err) return console.log(err);
+        res.redirect('/');
+    })
+})
+
 app.post('/ajouter', (req, res) => {
     db.collection('adresse').save(req.body, (err, result) => {
     if (err) return console.log(err)
