@@ -5,17 +5,19 @@
 
 <body>
      
-        <a href="http://localhost:8081/formulaire">Ajouter</a>
-        <a href="http://localhost:8081/Accueil">Accueil</a>
-        <a href="http://localhost:8081">Adresse</a>
+        <div id="menuAccueil">
+                <h2><a href="http://localhost:8081/formulaire">Ajouter</a></h2>
+                <h2><a href="http://localhost:8081/Accueil">Accueil</a></h2>
+                <h2><a href="http://localhost:8081">Adresse</a></h2>
+            </div>
     
-        <form action="/ajouter" method="POST">
+        <form id="formulaire" action="/ajouter" method="POST">
             
-            <input type="text" placeholder="prenom" name="prenom" required="">
-            <input type="text" placeholder="nom" name="nom" required="">
-            <input type="text" placeholder="telephone" name="telephone" required="">
-            <input type="text" placeholder="email" name="email" required="">
-            <button type="submit">Submit</button>
+            <input id="prenom" type="text" placeholder="prenom" name="prenom" required="">
+            <input id="nom" type="text" placeholder="nom" name="nom" required="">
+            <input id="telephone" type="text" placeholder="telephone" name="telephone" required="">
+            <input id="email" type="text" placeholder="email" name="email" required=""><br> 
+            <button id="submit" type="submit">Envoyer</button>
             
         </form>
      </body>

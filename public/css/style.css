@@ -119,6 +119,44 @@ h2 {
   width: 15%;
   padding-top: 17px;
 }
+#prenom,
+#nom,
+#telephone,
+#email {
+  padding: .5%;
+  font-family: Arial;
+  font-size: 1.2em;
+  font-weight: 400;
+  color: white;
+  border-radius: 15px;
+  background-color: #5d7565;
+  text-align: center;
+  margin-top: 5%;
+}
+::-webkit-input-placeholder {
+  color: white;
+}
+#formulaire {
+  text-align: center;
+}
+#submit {
+  padding: .5%;
+  font-family: Arial;
+  font-weight: 400;
+  color: white;
+  border: 0px solid white;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  background-color: #4a504c;
+  text-align: center;
+  margin: 1% 0;
+}
+#submit:hover {
+  background-color: white;
+  transition: background-color 1000ms linear;
+  color: black;
+  cursor: pointer;
+}
 .tableau {
   margin-top: 5%;
   margin-bottom: -5%;
