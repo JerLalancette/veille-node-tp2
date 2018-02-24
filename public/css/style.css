@@ -60,6 +60,7 @@ h2 {
   font-weight: 400;
   font-size: 1.5em;
   padding: 1% 2%;
+  width: 10%;
 }
 #pageMenu a:hover {
   background-color: white;
@@ -105,7 +106,7 @@ h2 {
 }
 .tableau {
   text-align: center;
-  margin-left: 30%;
+  margin: 0 12% 0 12%;
   margin-top: 3%;
 }
 ._id {
@@ -115,10 +116,22 @@ h2 {
 .nom,
 .telephone,
 .email {
-  margin-right: 10px;
+  width: 15%;
+  padding-top: 17px;
 }
 .tableau {
-  margin-top: 10px;
+  margin-top: 5%;
+  margin-bottom: -5%;
+}
+.tableau tbody tr td a {
+  text-decoration: underline;
+  color: white;
+  font-family: Arial;
+  font-size: 1.5em;
+}
+.tableau tbody tr td a:hover {
+  transition: color 1s;
+  color: #838383;
 }
 footer {
   display: flex;
