@@ -18,10 +18,10 @@
     
         <form id="formulaire" action="/ajouter" method="POST">
             
-            <input id="prenom" type="text" placeholder="prenom" name="prenom" required="">
-            <input id="nom" type="text" placeholder="nom" name="nom" required="">
-            <input id="telephone" type="text" placeholder="telephone" name="telephone" required="">
-            <input id="email" type="text" placeholder="email" name="email" required=""><br> 
+            <input id="prenom" type="text" placeholder="<%= __('prenom') %>" name="prenom" required="">
+            <input id="nom" type="text" placeholder="<%= __('nom') %>" name="nom" required="">
+            <input id="telephone" type="text" placeholder="<%= __('telephone') %>" name="telephone" required="">
+            <input id="email" type="text" placeholder="<%= __('courriel') %>" name="email" required=""><br> 
             <button id="submit" type="submit">Envoyer</button>
             
         </form>
