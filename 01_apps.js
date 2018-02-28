@@ -4,6 +4,13 @@ const app = express();
 const fs = require('fs');
 app.use(express.static('public'));
 
+i18n.configure({ 
+    locales : ['fr', 'en'],
+    cookie : 'langueChoisie', 
+    directory : __dirname + '/locales' });
+
+app.use(i18n.init);
+
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const bodyParser= require('body-parser');
@@ -11,6 +18,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 var util = require("util");
 
 app.set('view engine', 'ejs'); // générateur de template
+
+app.get("/en", function (req, res) {
+    res.setLocale("/en");
+    console.log(res.__('courriel'));
+
+    res.render("accueil.ejs");
+})
 
 const peupler = require('./mes_modules/peupler');
 
