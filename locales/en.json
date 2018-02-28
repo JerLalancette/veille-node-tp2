@@ -1,3 +1,11 @@
 {
-	"courriel": "email"
+	"courriel": "email",
+	"prenom": "Name",
+	"nom": "Last name",
+	"telephone": "phone",
+    "accueil": "Home",
+    "peupler": "Populate",
+    "vider": "Trash",
+	"adresses": "Members",
+	"ajouter": "Add"
 }

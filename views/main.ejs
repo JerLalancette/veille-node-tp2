@@ -20,10 +20,10 @@
                     <tr>
                         <% noligne++ %>
                         <td class="_id"><a href="/trier/_id/<%= ordre %>">id</a></td>
-                        <td class="prenom"><a href="/trier/prenom/<%= ordre %>">prenom</a></td>
-                        <td class="nom"><a href="/trier/nom/<%= ordre %>">nom</a></td>
-                        <td class="telephone"><a href="/trier/telephone/<%= ordre %>">telephone</a></td>
-                        <td class="email"><a href="/trier/email/<%= ordre %>">email</a></td>
+                        <td class="prenom"><a href="/trier/prenom/<%= ordre %>"> <%= __('prenom') %> </a></td>
+                        <td class="nom"><a href="/trier/nom/<%= ordre %>"> <%= __('nom') %> </a></td>
+                        <td class="telephone"><a href="/trier/telephone/<%= ordre %>"> <%= __('telephone') %> </a></td>
+                        <td class="email"><a href="/trier/email/<%= ordre %>"> <%= __('courriel') %> </a></td>
                         <td class="ajouter"><a href="http://localhost:8081/formulaire"><i class="fas fa-user-plus"></i></a></td>
                     </tr>
                 <% } %>

@@ -1,8 +1,10 @@
 const express = require('express');
 const i18n = require("i18n");
+const cookieParser = require("cookie-parser");
 const app = express();
 const fs = require('fs');
 app.use(express.static('public'));
+app.use(cookieParser());
 
 i18n.configure({ 
     locales : ['fr', 'en'],
@@ -19,12 +21,17 @@ var util = require("util");
 
 app.set('view engine', 'ejs'); // générateur de template
 
-app.get("/en", function (req, res) {
-    res.setLocale("/en");
+
+app.get('/:locale(en|fr)',  (req, res) => {
+    // on récupère le paramètre de l'url pour enregistrer la langue
+    console.log(req.params.locale)
+    res.cookie('langueChoisie' , req.params.locale)
+    res.setLocale(req.params.locale);
+    // on peut maintenant traduire
     console.log(res.__('courriel'));
 
-    res.render("accueil.ejs");
-})
+    res.redirect("/");
+  })
 
 const peupler = require('./mes_modules/peupler');
 
@@ -134,6 +141,7 @@ app.get('/', (req, res) => {
         // transfert du contenu vers la vue index.ejs (renders)
         // affiche le contenu de la BD
         res.render('gabarit.ejs', {adresses: resultat, ordre:'asc'})
+        console.log(req.cookies.langueChoisie);
  }) 
 })
 
