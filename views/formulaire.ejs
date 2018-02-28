@@ -4,8 +4,11 @@
 <%-  include header %>
 
 <body>
-        <p><a href="http://localhost:8081/fr">fr</a></p>
-        <p><a href="http://localhost:8081/en">en</a></p>
+        <% if(getLocale() == 'en') { %>
+            <p><a href="http://localhost:8081/fr">fr</a></p>
+        <% } else { %>
+            <p><a href="http://localhost:8081/en">en</a></p>
+        <% } %>
         <div id="menuAccueil">
                 <h2><a href="http://localhost:8081/formulaire"><%= __('ajouter') %></a></h2>
                 <h2><a href="http://localhost:8081/Accueil"><%= __('accueil') %></a></h2>

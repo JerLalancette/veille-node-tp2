@@ -5,8 +5,11 @@
 
 <body>
 
-        <p><a href="http://localhost:8081/fr">fr</a></p>
-        <p><a href="http://localhost:8081/en">en</a></p>
+        <% if(getLocale() == 'en') { %>
+            <p><a href="http://localhost:8081/fr">fr</a></p>
+        <% } else { %>
+            <p><a href="http://localhost:8081/en">en</a></p>
+        <% } %>
 
     <div id="pageMenu">
         <a href="http://localhost:8081/Accueil"><i class="fab fa-adn"></i><%= __('accueil') %></a>
