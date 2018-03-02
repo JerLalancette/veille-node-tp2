@@ -18,12 +18,28 @@
         <a href="http://localhost:8081"><i class="far fa-address-book"></i><%= __('adresses') %></a>
     </div>
     <%-  include main %>
-
+    
     <%-  include footer %>
-
+    
 </body>
 
+
+
 <script type="text/javascript">
+
+    function traiterRequest(e)
+    {
+        console.log("xhr.readyState = " + xhr.readyState)
+        console.log("xhr.status = " + xhr.status)
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log('ajax fonctionne')
+            let  maReponse = JSON.parse(xhr.responseText);
+            console.log(xhr.responseText);
+            console.log(maReponse._id)
+        }
+    }
+
+
     let elmSauver = document.querySelectorAll('.modifier')
     console.log('elmSauver = ' + elmSauver.length)
     for (elm of elmSauver)
@@ -38,16 +54,21 @@
             let email = laLigne.children[4].innerHTML
             console.log(laLigne);
    
-            let elmForm = document.getElementById('mon_formulaire')
-            console.log(elmForm.tagName)
-            let elmInput = elmForm.querySelectorAll('input')
-            elmInput[0].value = id
-            elmInput[1].value = prenom
-            elmInput[2].value = nom
-            elmInput[3].value = telephone
-            elmInput[4].value = email
-   
-            elmForm.submit()
+            console.log('ok')
+            xhr = new XMLHttpRequest();
+            xhr.open('POST', "/ajax_modifier", true);
+            data = {
+                "_id" : id,
+                "prenom" : prenom,
+                "nom" : nom,
+                "telephone" : telephone,
+                "courriel" : email
+            }
+            console.log(data)
+            sData = JSON.stringify(data);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(sData);
+            xhr.addEventListener("readystatechange", traiterRequest, false);
    
         })
     } 

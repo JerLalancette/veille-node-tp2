@@ -16,6 +16,7 @@ app.use(i18n.init);
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const bodyParser= require('body-parser');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 var util = require("util");
 
@@ -81,6 +82,18 @@ app.get('/detruire/:_id', (req, res) => {
     }) 
 })
 
+/*---------------Detruire AJAX----------------*/ 
+
+// app.get('/detruire/:_id', (req, res) => {
+
+//     db.collection('adresse').findOneAndDelete( {_id: ObjectID(req.params._id)} ,(err, resultat) => {
+
+//         if (err) return console.log(err)
+
+//         res.redirect('/')
+//     }) 
+// })
+
 /*---------------profil----------------*/ 
 app.get('/profil/:id', (req, res) => {
 
@@ -112,27 +125,42 @@ app.get('/trier/:clef/:ordre', (req, res) => {
     })
 })
 
-app.post('/modifier', (req, res) => {
-    console.log('req.body' + req.body)
+// app.post('/modifier', (req, res) => {
+//     console.log('req.body' + req.body)
 
-        if (req.body['_id'] != undefined) { 
-            console.log('sauvegarde') 
-            var oModif = {
-                "_id": ObjectID(req.body['_id']), 
-                prenom:req.body.prenom, 
-                nom: req.body.nom,
-                telephone:req.body.telephone,
-                email:req.body.email
-            }
+//         if (req.body['_id'] != undefined) { 
+//             console.log('sauvegarde') 
+//             var oModif = {
+//                 "_id": ObjectID(req.body['_id']), 
+//                 prenom:req.body.prenom, 
+//                 nom: req.body.nom,
+//                 telephone:req.body.telephone,
+//                 email:req.body.email
+//             }
             
             
-        }
-    db.collection('adresse').save(oModif, (err, result) => {
+//         }
+//     db.collection('adresse').save(oModif, (err, result) => {
+//         if (err) return console.log(err)
+//         console.log('sauvegarder dans la BD')
+//         res.redirect('/')
+//     })
+// })
+
+/*---------------Modifier AJAX-----------------*/
+
+app.post('/ajax_modifier', (req, res) => {
+    console.log('route /modifier');
+
+    req.body._id = ObjectID(req .body._id);
+    db.collection('adresse').save(req.body, (err, result) => {
         if (err) return console.log(err)
         console.log('sauvegarder dans la BD')
-        res.redirect('/')
+        res.send(JSON.stringify(req.body))
     })
 })
+
+/*---------------------------------------------*/
 
 app.get('/', (req, res) => {
     let cursor = db.collection('adresse')
