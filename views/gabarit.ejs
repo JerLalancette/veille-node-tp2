@@ -72,5 +72,40 @@
    
         })
     } 
+
+    function eraseRequest(e)
+    {
+        console.log("xhr.readyState = " + xhr.readyState)
+        console.log("xhr.status = " + xhr.status)
+        if(xhr.readyState == 4 && xhr.status == 200){
+            e.target.ligne.parentNode.removeChild(e.target.ligne);
+            console.log(xhr.responseText);
+        }
+    }
+
+    let elmDetruire = document.querySelectorAll('.detruire')
+    console.log('elmDetruire = ' + elmDetruire.length)
+    for (elm of elmDetruire)
+    {
+        elm.addEventListener('click', function(){
+
+            let laLigne = this.parentNode.parentNode
+            let id = laLigne.children[0].innerHTML
+            console.log(laLigne);
+   
+            console.log('ok')
+            xhr = new XMLHttpRequest();
+            xhr.open('POST', "/ajax_detruire", true);
+            data = {
+                "_id" : id
+            }
+            console.log(data)
+            sData = JSON.stringify(data);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(sData);
+            xhr.ligne = laLigne;
+            xhr.addEventListener("readystatechange", eraseRequest, false);
+        })
+    } 
    </script>
 </html>

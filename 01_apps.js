@@ -72,17 +72,15 @@ app.post('/ajouter', (req, res) => {
     })
 })
 
-app.get('/detruire/:_id', (req, res) => {
+app.post('/ajax_detruire', (req, res) => {
 
-    db.collection('adresse').findOneAndDelete( {_id: ObjectID(req.params._id)} ,(err, resultat) => {
+    db.collection('adresse').findOneAndDelete( {_id: ObjectID(req.body._id)} ,(err, resultat) => {
 
         if (err) return console.log(err)
 
-        res.redirect('/')
+        res.send("élément détruit");
     }) 
 })
-
-/*---------------Detruire AJAX----------------*/ 
 
 // app.get('/detruire/:_id', (req, res) => {
 
@@ -93,6 +91,8 @@ app.get('/detruire/:_id', (req, res) => {
 //         res.redirect('/')
 //     }) 
 // })
+
+
 
 /*---------------profil----------------*/ 
 app.get('/profil/:id', (req, res) => {
