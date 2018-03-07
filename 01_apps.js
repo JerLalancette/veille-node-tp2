@@ -13,6 +13,9 @@ i18n.configure({
 
 app.use(i18n.init);
 
+var server = require('http').createServer(app);
+var io = require('./mes_modules/chat_socket').listen(server);
+
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const bodyParser= require('body-parser');
@@ -21,6 +24,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 var util = require("util");
 
 app.set('view engine', 'ejs'); // générateur de template
+
+
 
 
 app.get('/:locale(en|fr)',  (req, res) => {
@@ -175,11 +180,16 @@ app.get('/', (req, res) => {
 
 let db // variable qui contiendra le lien sur la BD
 
+app.get('/Chat', (req,res) => {
+    res.render('socket_vue');
+})
+
 MongoClient.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database) => {
     if (err) return console.log(err)
         db = database.db('carnet_adresse')
         // lancement du serveur Express sur le port 8081
-        app.listen(8081, () => {
+        server.listen(8081, () => {
         console.log('connexion à la BD et on écoute sur le port 8081')
     })
 })
+
