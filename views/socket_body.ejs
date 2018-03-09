@@ -1,15 +1,16 @@
 
 <section id="enregistrement">
-    <input type="text">
-    <button onclick="enregistrement()">Enregistrement</button>
+    <h2>Enregistrez votre nom</h2>
+    <input id="ZoneNom" type="text">
+    <button id="boutonEnr" onclick="enregistrement()">Enregistrer</button>
 </section>
+<button id="boutonDel" onclick="deconnection()">Deconnection</button>
 
 
 <section class="chat">
     <h2 id="utilisateur"></h1>
     <div id="list_user">
         <h2 id="uActif">Utilisateurs actifs</h1>
-        <button onclick="deconnection()">Deconnection</button>
     </div>
     <section id="message">
         <input type="text" id="texteMessage" name="txtMessage">
@@ -92,7 +93,7 @@
         messageTxt.innerHTML = user + " - " + message;
         var element = document.getElementById("message");
         element.appendChild(messageTxt);
-        messageTxt.style.color = couleur;
+        messageTxt.style.backgroundColor = couleur;
     }
 
     function cacherUser(id) {

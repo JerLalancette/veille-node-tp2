@@ -17,8 +17,8 @@ module.exports.listen = function(server){
         })
         socket.on("ajouterMessage", function(data, couleur) {
             console.log(data.message);
-            socket.broadcast.emit("nouveauMessage", data, "#000");
-            socket.emit("nouveauMessage", data, "#FF0000");
+            socket.broadcast.emit("nouveauMessage", data, "#DCDCDC");
+            socket.emit("nouveauMessage", data, "#00BFFF");
         })
         socket.on("deconnection", function(data) {
             console.log(data.id);
