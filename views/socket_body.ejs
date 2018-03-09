@@ -1,17 +1,19 @@
 
-<h2>Clavardage</h2>
 <section id="enregistrement">
- <input type="text">
- <button onclick="enregistrement()">Enregistrement</button>
+    <input type="text">
+    <button onclick="enregistrement()">Enregistrement</button>
 </section>
 
 
 <section class="chat">
-    <table id="message"></table>
-    <div id="list_user"></div>
+    <h2 id="utilisateur"></h1>
+    <div id="list_user">
+        <h2 id="uActif">Utilisateurs actifs</h1>
+        <button onclick="deconnection()">Deconnection</button>
+    </div>
     <section id="message">
-        <input type="text" name="txtMessage">
-        <button onclick="EnvoyerMessage()">Transmettre</button>
+        <input type="text" id="texteMessage" name="txtMessage">
+        <button onclick="transmettre()">Transmettre</button>
     </section>
 </section>
 
@@ -33,13 +35,14 @@
             })
 
             socket.on('NouvelUtilisateur', function(data){
-                ajouter(data.user);
+                ajouter(data.user, data.id);
             })
-            socket.on("nouveauMessage", function(data) {
-                ajouterMessage(data.user, data.message);
+            socket.on("nouveauMessage", function(data, couleur) {
+                ajouterMessage(data.user, data.message, couleur);
             })
             socket.on("deconnection", function(data) {
                 ajouterMessage(data.nom, data.message);
+                cacherUser(data.id)
             })
         });
     }
@@ -49,52 +52,56 @@
         console.log(elmUser.value);
         socket.nom = elmUser.value;
         var user = document.getElementById("utilisateur");
+        console.log(user);
         user.innerHTML = "Utilisateur actif : " + elmUser.value;
         var section = document.getElementById("enregistrement");
         section.style.display = "none";
         /* l'événement « setUser » est transmit avec un objet 
         */
-        socket.emit('ajouterUtilisateur', {user : elmUser.value})
+        socket.emit('ajouterUtilisateur', {user : elmUser.value, id : socket.id})
     }
 
     function deconnection() {
-        var elmUser = document.getElementById("enregistrement");
-        var user = document.getElementById("Utilisateur");
-        delete user(elmUser.value);
-        socket.emit("deconnection", {id:socket.id, nom:socket.nom});
-        cacher();
+        socket.emit("deconnection", {id:socket.id, nom:socket.nom})
     }
 
     function transmettre() {
         var elmUser = document.querySelector("#enregistrement input");
-        var message = document.querySelector("#message_a_transmettre input");
+        var message = document.querySelector("#message input");
 
         console.log(message.value);
 
         socket.emit("ajouterMessage", {user:elmUser.value, message:message.value})
     }
 
-    function ajouter(utilisateur) {
+    function ajouter(personne, id) {
         var user = document.getElementById("utilisateur");
         var listUser = document.createElement("p");
-        listUser.innerHTML = utilisateur;
+        listUser.innerHTML = personne;
 
         var element = document.getElementById("list_user");
         var element2 = document.getElementById("chat");
-        element.appendChild(user);
-        element2.appendChild(listUser);
+        
+        var nomUser = element.appendChild(listUser);
+        nomUser.setAttribute("class", id);
     }
 
-    function ajouterMessage(user, message) {
+
+    function ajouterMessage(user, message, couleur) {
         var messageTxt = document.createElement("p");
         messageTxt.innerHTML = user + " - " + message;
         var element = document.getElementById("message");
-        element.appendChild("messageTxt");
+        element.appendChild(messageTxt);
+        messageTxt.style.color = couleur;
     }
 
-    function cacher() {
-        var user = document.getElementById("utilisateur");
-        user.style.display = "none";
+    function cacherUser(id) {
+        var pUser = document.getElementsByClassName(id);
+        console.log(pUser);
+        pUser[0].parentNode.removeChild(pUser[0]);
+        pUser[0].parentNode.removeChild(pUser[0]);
+        var login = document.getElementById("uActif");
+        login.style.display = "none";
     }
 
 </script>
