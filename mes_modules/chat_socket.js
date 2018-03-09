@@ -1,3 +1,5 @@
+
+const util = require('util');
 let socketio = require('socket.io')
 
 module.exports.listen = function(server){
@@ -7,7 +9,12 @@ module.exports.listen = function(server){
     let objUtilisateur = {}
     io.on('connection', function(socket){
         console.log(socket.id)
-    // .......
+        
+        socket.on('setUser', function(data){
+            console.log(util.inspect(data));
+
+            socket.emit('NouvelUtilisateur', data);
+        })
     })
     return io
 }

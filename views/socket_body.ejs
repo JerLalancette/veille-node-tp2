@@ -6,11 +6,12 @@
 </section>
 
 
-<section class="chat" style="display:none">
-    <div id="list_user"></div>
+<section class="chat">
     <table id="message"></table>
+    <div id="list_user"></div>
     <section id="message">
-        <input type="text" name="txtMessage"><button>Transmettre</button>
+        <input type="text" name="txtMessage">
+        <button onclick="EnvoyerMessage()">Transmettre</button>
     </section>
 </section>
 
@@ -27,17 +28,73 @@
         socket.on('connect', function(){
             console.log('Le socket id = ' + socket.id); 
             /* l'événement ackUser a été transmis par le serveur */ 
-            socket.on('ackUser', function(data){
+            socket.on('valid_user', function(data){
                 console.log('data en provenance du serveur = ' + data.user)
-        })
+            })
+
+            socket.on('NouvelUtilisateur', function(data){
+                ajouter(data.user);
+            })
+            socket.on("nouveauMessage", function(data) {
+                ajouterMessage(data.user, data.message);
+            })
+            socket.on("deconnection", function(data) {
+                ajouterMessage(data.nom, data.message);
+            })
         });
     }
     /* ---------------------------------------------------------- */
     function enregistrement(){
-        var elmUser = document.querySelector('#enregistrement input')
-        console.log(elmUser.value)
+        var elmUser = document.querySelector('#enregistrement input');
+        console.log(elmUser.value);
+        socket.nom = elmUser.value;
+        var user = document.getElementById("utilisateur");
+        user.innerHTML = "Utilisateur actif : " + elmUser.value;
+        var section = document.getElementById("enregistrement");
+        section.style.display = "none";
         /* l'événement « setUser » est transmit avec un objet 
         */
-        socket.emit('setUser', {user : elmUser.value})
+        socket.emit('ajouterUtilisateur', {user : elmUser.value})
     }
+
+    function deconnection() {
+        var elmUser = document.getElementById("enregistrement");
+        var user = document.getElementById("Utilisateur");
+        delete user(elmUser.value);
+        socket.emit("deconnection", {id:socket.id, nom:socket.nom});
+        cacher();
+    }
+
+    function transmettre() {
+        var elmUser = document.querySelector("#enregistrement input");
+        var message = document.querySelector("#message_a_transmettre input");
+
+        console.log(message.value);
+
+        socket.emit("ajouterMessage", {user:elmUser.value, message:message.value})
+    }
+
+    function ajouter(utilisateur) {
+        var user = document.getElementById("utilisateur");
+        var listUser = document.createElement("p");
+        listUser.innerHTML = utilisateur;
+
+        var element = document.getElementById("list_user");
+        var element2 = document.getElementById("chat");
+        element.appendChild(user);
+        element2.appendChild(listUser);
+    }
+
+    function ajouterMessage(user, message) {
+        var messageTxt = document.createElement("p");
+        messageTxt.innerHTML = user + " - " + message;
+        var element = document.getElementById("message");
+        element.appendChild("messageTxt");
+    }
+
+    function cacher() {
+        var user = document.getElementById("utilisateur");
+        user.style.display = "none";
+    }
+
 </script>
